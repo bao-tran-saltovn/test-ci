@@ -53,3 +53,5 @@ jobs:
         run: |
           echo "This is a required status check"
           echo "Branch protection should require this to pass"
+          echo "Simulating a failure..."
+          exit 1
