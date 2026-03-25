@@ -1,0 +1,55 @@
+name: Branch Protection Test
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+jobs:
+  test:
+    name: Run Tests
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Run basic test
+        run: |
+          echo "Running tests..."
+          echo "All tests passed!"
+      
+      - name: Verify branch protection
+        run: |
+          echo "This workflow must pass for branch protection to allow merges"
+          echo "Branch: ${{ github.ref_name }}"
+          echo "Event: ${{ github.event_name }}"
+
+  lint:
+    name: Lint Check
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Run linting
+        run: |
+          echo "Running linting checks..."
+          echo "Linting passed!"
+
+  required-check:
+    name: Required Status Check
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Required validation
+        run: |
+          echo "This is a required status check"
+          echo "Branch protection should require this to pass"
